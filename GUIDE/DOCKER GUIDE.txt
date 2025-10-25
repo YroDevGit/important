@@ -1,0 +1,9 @@
+ DOCKER:
+
+//if may gn edit lng nga file sng app the re build
+docker-compose down 
+docker-compose up -d
+
+
+//Run docker after build
+docker ps

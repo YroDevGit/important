@@ -1,0 +1,17 @@
+//CMD
+docker run -d -p 9000:9000 --name portainer --restart=always -v \\.\pipe\docker_engine:\\.\pipe\docker_engine -v portainer_data:/data portainer/portainer-ce
+
+
+//CMD
+docker run -d -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+
+
+//CMD: Verify
+docker ps
+//Expected result
+CONTAINER ID   IMAGE                    COMMAND        CREATED         STATUS         PORTS                                         NAMES
+32a11ab000bd   portainer/portainer-ce   "/portainer"   6 seconds ago   Up 5 seconds   0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp   portainer
+
+//Browser open:
+http://localhost:9000/
+

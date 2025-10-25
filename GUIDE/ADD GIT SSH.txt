@@ -1,0 +1,56 @@
+Login to ssh
+
+mkdir -p ~/git
+cd ~/git
+git init --bare photographer.git
+
+Result → Your repo lives at:
+/home/admin111/git/photographer.git
+
+nano ~/git/photographer.git/hooks/post-receive
+
+
+
+#!/bin/bash
+TARGET="/home/lbc/www/lbc"
+GIT_DIR="/home/lbc/git/lbc.git"
+BRANCH="main"
+
+echo "Deploy started at $(date)" >> ~/deploy.log
+
+echo "Deploying branch $BRANCH to $TARGET ..." >> ~/deploy.log
+GIT_WORK_TREE=$TARGET git --git-dir=$GIT_DIR checkout -f $BRANCH >> ~/deploy.log 2>&1
+
+echo "Deploy finished at $(date)" >> ~/deploy.log
+
+//////
+ctrl+0 + enter to save
+
+chmod +x ~/git/photographer.git/hooks/post-receive
+
+////
+
+cd ..
+cd www
+mkdir photographer
+
+//
+
+push:
+git add .
+git commit -m
+git remote add alwaysdata ssh://lbc@ssh-lbc.alwaysdata.net/~/git/lbc.git
+git push alwaysdata main
+
+logs:
+cat ~/deploy.log
+ls -lah ~/www/photographer
+
+
+load vendor
+cd ~/www/photographer
+composer install --no-dev --optimize-autoloader
+
+
+
+

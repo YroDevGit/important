@@ -1,0 +1,1 @@
+scp -r "C:\Users\Lenovo\Videos\LARAVEL\TEST-PROJECT\album" admin111@ssh-admin111.alwaysdata.net:/home/admin111/www
